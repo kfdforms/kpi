@@ -6,3 +6,7 @@ libpcre3-dev
 libpq-dev
 nodejs
 ttfautohint
+libsasl2-dev
+python-dev
+libldap2-dev
+libssl-dev
