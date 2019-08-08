@@ -20,27 +20,25 @@ from ..static_lists import EXTRA_LANG_INFO
 
 
 # Baseline LDAP configuration.
-AUTH_LDAP_SERVER_URI =
-    os.environ.get('LDAP_SERVER_URI', 'ldap://ldap.aranya.gov.in:389')
-AUTH_LDAP_BIND_DN =
-    os.environ.get('LDAP_BIND_DN', 'cn=admin,dc=aranya,dc=gov,dc=in')
-AUTH_LDAP_BIND_PASSWORD =
-    os.environ.get('LDAP_BIND_PASSWORD', 'admin123')
+AUTH_LDAP_SERVER_URI = os.environ.get('LDAP_SERVER_URI',
+                                      'ldap://ldap.aranya.gov.in:389')
+AUTH_LDAP_BIND_DN = os.environ.get('LDAP_BIND_DN',
+                                   'cn=admin,dc=aranya,dc=gov,dc=in')
+AUTH_LDAP_BIND_PASSWORD = os.environ.get('LDAP_BIND_PASSWORD',
+                                         'admin123')
 
-AUTH_LDAP_USER_SEARCH =
-    LDAPSearch(
-        os.environ.get('LDAP_USER_SEARCH_BASE', 'dc=aranya,dc=gov,dc=in'),
-        ldap.SCOPE_SUBTREE,
-        "(uid=%(user)s)")
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    os.environ.get('LDAP_USER_SEARCH_BASE', 'dc=aranya,dc=gov,dc=in'),
+    ldap.SCOPE_SUBTREE,
+    "(uid=%(user)s)")
 # or perhaps:
 # AUTH_LDAP_USER_DN_TEMPLATE = "uid=%(user)s,ou=users,dc=example,dc=com"
 
 # Set up the basic group parameters.
-AUTH_LDAP_GROUP_SEARCH =
-    LDAPSearch(
-        os.environ.get('LDAP_GROUP_SEARCH_BASE', 'dc=aranya,dc=gov,dc=in'),
-        ldap.SCOPE_SUBTREE,
-        "(objectClass=groupOfNames)")
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+    os.environ.get('LDAP_GROUP_SEARCH_BASE', 'dc=aranya,dc=gov,dc=in'),
+    ldap.SCOPE_SUBTREE,
+    "(objectClass=groupOfNames)")
 AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
 
 # Populate the Django user from the LDAP directory.
