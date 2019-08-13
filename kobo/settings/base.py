@@ -21,7 +21,12 @@ from ..static_lists import EXTRA_LANG_INFO
 
 # Baseline LDAP configuration.
 AUTH_LDAP_SERVER_URI = os.environ.get('LDAP_SERVER_URI',
-                                      'ldap://ldap.aranya.gov.in:389')
+                                      'ldaps://ldap.aranya.gov.in:636')
+
+# Disabling verification of SSL sertificate so that self-created certificates
+# may be used
+ldap.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_NEVER)
+
 AUTH_LDAP_BIND_DN = os.environ.get('LDAP_BIND_DN',
                                    'cn=admin,dc=aranya,dc=gov,dc=in')
 AUTH_LDAP_BIND_PASSWORD = os.environ.get('LDAP_BIND_PASSWORD',
