@@ -46,6 +46,12 @@ AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
     "(objectClass=groupOfNames)")
 AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
 
+# Use LDAP group membership to calculate group permissions.
+AUTH_LDAP_FIND_GROUP_PERMS = True
+
+# Mirroring LDAP and Django groups
+AUTH_LDAP_MIRROR_GROUPS = True
+
 # Populate the Django user from the LDAP directory.
 AUTH_LDAP_USER_ATTR_MAP = {
     "first_name": "givenName",
@@ -67,9 +73,6 @@ AUTH_LDAP_USER_FLAGS_BY_GROUP = {
    "is_staff": "cn=staff,ou=groups,dc=aranya,dc=gov,dc=in",
    "is_superuser": "cn=superuser,ou=groups,dc=aranya,dc=gov,dc=in"
 }
-
-# Use LDAP group membership to calculate group permissions.
-AUTH_LDAP_FIND_GROUP_PERMS = True
 
 # Cache group memberships for an hour to minimize LDAP traffic
 AUTH_LDAP_CACHE_GROUPS = False
