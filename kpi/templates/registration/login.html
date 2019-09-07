@@ -8,9 +8,10 @@
     </a></div>
     {% csrf_token %}
     {{ form.as_p }}
-    <a href="{% url 'auth_password_reset' %}" class="registration__forgot">
-      {% trans "Forgot?" %}
+    <a href="https://oauth.aranya.gov.in" class="registration__forgot">
+      {% trans "Change Password?" %}
     </a>
+    <div/>
 
     <input type="submit" value="Login" class="registration__action" />
     <input type="hidden" name="next" value="{{ next }}" />
