@@ -9,6 +9,7 @@ $viewTemplates = require './view.templates'
 $viewUtils = require './view.utils'
 $viewChoices = require './view.choices'
 $viewParams = require './view.params'
+$viewMandatorySetting = require './view.mandatorySetting'
 $acceptedFilesView = require './view.acceptedFiles'
 $viewRowDetail = require './view.rowDetail'
 renderKobomatrix = require('js/formbuild/renderInBackbone').renderKobomatrix
@@ -213,7 +214,12 @@ module.exports = do ->
       # don't display columns that start with a $
       hiddenFields = ['label', 'hint', 'type', 'select_from_list_name', 'kobo--matrix_list', 'parameters']
       for [key, val] in @model.attributesArray() when !key.match(/^\$/) and key not in hiddenFields
-        new $viewRowDetail.DetailView(model: val, rowView: @).render().insertInDOM(@)
+        if key is 'required'
+          @mandatorySetting = new $viewMandatorySetting.MandatorySettingView({
+            model: @model.get('required')
+          }).render().insertInDOM(@)
+        else
+          new $viewRowDetail.DetailView(model: val, rowView: @).render().insertInDOM(@)
 
       questionType = @model.get('type').get('typeId')
       if (
@@ -449,7 +455,6 @@ module.exports = do ->
         cid: model.cid
       template_args.rank_rows = rank_rows
       extra_score_contents = $viewTemplates.$$render('row.rankView', @, template_args)
-      @$('.card--selectquestion__expansion').eq(0).append(extra_score_contents).addClass('js-cancel-select-row')
       @$('.card--selectquestion__expansion').eq(0).append(extra_score_contents).addClass('js-cancel-select-row')
       @editRanks()
     editRanks: ->
